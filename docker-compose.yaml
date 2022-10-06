@@ -1,0 +1,21 @@
+
+version: '3'
+
+services:
+  db:
+    image: mongo:4.2
+    volumes:
+      - db:/data/db/
+
+  rita:
+    image: quay.io/activecm/rita:${VERSION:-latest}
+    build: .
+    links:
+      # give db an alias of "localhost" so that RITA's default config works unchanged
+      - db:ec2-user_db_1
+    volumes:
+      - ${CONFIG:?You must provide a path to your CONFIG}:/etc/rita/config.yaml
+      - ${LOGS:?You must provide a path to your LOGS}:/home/ec2-user/logs/
+
+volumes:
+  db:
