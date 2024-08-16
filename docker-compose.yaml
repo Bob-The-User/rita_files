@@ -12,7 +12,7 @@ services:
     build: .
     links:
       # give db an alias of "localhost" so that RITA's default config works unchanged
-      - db:rita-db-1
+      - db:rita_db_1
     volumes:
       ##- ${CONFIG:?You must provide a path to your CONFIG}:/etc/rita/config.yaml
       ##- ${LOGS:?You must provide a path to your LOGS}:/home/forensics/logs/
